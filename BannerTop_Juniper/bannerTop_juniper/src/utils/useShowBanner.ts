@@ -1,32 +1,20 @@
-import { useEffect, useState } from "react";
-
-type CategoryKeywords = {
-  [key: string]: string[];
+export const uniqueDataKeywords = {
+  Home: ["Vuelos", "Circuitos", "Alojamientos"], // Agrega los valores correspondientes a Home
+  Vuelos: ["Flights"],
+  Alojamientos: ["Hotels"],
+  Paquetes: ["FlightHotel", "Packages"],
+  Circuitos: ["Tours"],
+  Actividades: ["Activities"],
+  Traslados: ["Transfers"],
+  Asistencias: ["Assistance"],
 };
 
-export function useShowBannerForCategories(selectedCategories: string[]) {
-  const [showBanner, setShowBanner] = useState(false);
-
-  useEffect(() => {
-    const categoryKeywords: CategoryKeywords = {
-      Home: ["home"],
-      Vuelos: ["flights"],
-      Alojamientos: ["hotels"],
-      Paquetes: ["flighthotel", "packages"],
-      Circuitos: ["tours"],
-      Actividades: ["activities"],
-      Traslados: ["transfers"],
-      Asistencias: ["assistance"],
-    };
-
-    const currentUrl = window.location.href;
-
-    const matches = selectedCategories.some((category) =>
-      categoryKeywords[category]?.some((keyword) => currentUrl.includes(keyword))
-    );
-
-    setShowBanner(matches);
-  }, [selectedCategories]);
-
+export const getShowBannerStatus = (verticalData: string[], uniqueDataKeywords: { [key: string]: string[] }) => {
+  const currentUrl = window.location.href;
+  const keywords = verticalData.flatMap((value) => uniqueDataKeywords[value] || []);
+  const showBanner = keywords.some((keyword) => currentUrl.includes(keyword));
+  
+  console.log("showBanner:", showBanner); // Agregamos un console.log para ver el valor
+  
   return showBanner;
-}
+};
