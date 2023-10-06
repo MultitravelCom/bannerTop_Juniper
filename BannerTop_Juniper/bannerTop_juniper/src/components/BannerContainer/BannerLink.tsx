@@ -6,27 +6,22 @@ interface BannerLinkProps {
     event: React.MouseEvent<HTMLAnchorElement>,
     target: string
   ) => void;
-  isMobile: boolean;
-  UrlImgPaquetes: string;
   imageUrlsDesktop: string;
   imageUrlMobile: string;
+  imageUrl: string;
 }
 
 const BannerLink: React.FC<BannerLinkProps> = ({
   showPackageImages,
   scrollAncla,
-  UrlImgPaquetes,
   imageUrlsDesktop,
-  imageUrlMobile
+  imageUrlMobile,
+  imageUrl,
 }) => {
-  
-  const linkUrl = showPackageImages
-    ? "https://www.multitravel.com/venta-personalizada/argentina"
-    : "https://www.multitravel.com/hotels";
 
   return (
     <a
-      href={linkUrl}
+      href={imageUrl}
       target="_blank"
       onClick={(event) =>
         !showPackageImages ? scrollAncla(event, "home-sliding-offers-2") : null
@@ -37,7 +32,7 @@ const BannerLink: React.FC<BannerLinkProps> = ({
             media="(min-width: 1024px)"
             srcSet={
               showPackageImages
-                ? `${UrlImgPaquetes}`
+                ? `${imageUrlsDesktop}`
                 : `${imageUrlsDesktop}`
             }
           />
@@ -45,7 +40,7 @@ const BannerLink: React.FC<BannerLinkProps> = ({
             media="(min-width: 768px) and (max-width: 1023px)"
             srcSet={
               showPackageImages
-                ? `${UrlImgPaquetes}`
+                ? `${imageUrlsDesktop}`
                 : `${imageUrlsDesktop}`
             }
           />
@@ -54,7 +49,7 @@ const BannerLink: React.FC<BannerLinkProps> = ({
             alt=""
             srcSet={
               showPackageImages
-                ? `${UrlImgPaquetes}`
+                ? `${imageUrlsDesktop}`
                 : `${imageUrlMobile}`
             }
           />
