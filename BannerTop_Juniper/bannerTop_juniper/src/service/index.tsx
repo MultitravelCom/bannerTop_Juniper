@@ -10,7 +10,7 @@ type DataItem = {
 
 export async function fetchDataFromAPIStrapi(): Promise<DataItem[]> {
     try {
-        const response = await axios.get('https://xatega9fpn.us-east-1.awsapprunner.com/api/banner-top-junipers?populate=*');
+        const response = await axios.get('https://strapicontent.apimultitravel.com/api/banner-top-junipers?populate=*');
         console.log("response---->",response.data);
         return response.data;
     } catch (error) {

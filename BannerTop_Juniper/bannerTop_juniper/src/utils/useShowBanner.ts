@@ -1,5 +1,5 @@
 export const uniqueDataKeywords = {
-  Home: ["https://br.multitravel.com/"],
+  Home: ["https://www.multitravel.com/"],
   Alojamientos: ["/hotels"],
   Paquetes: ["/flighthotel"],
   Circuitos: ["/tours"],

@@ -68,3 +68,15 @@ export const getUrlLinkImage = (data: any, position: string) => {
 
   return positionData ? positionData.attributes.Link_Imagen : "";
 };
+
+// *************** DETECTAR URL PARA EL ID***************
+export function getBannerId() {
+  const url = window.location.href;
+
+  if (url.includes('/flighthotel')) {
+      return 'flighthotel';
+  } else {
+      return 'no_flighthotel';
+  }
+}
+// ***********************************************************
