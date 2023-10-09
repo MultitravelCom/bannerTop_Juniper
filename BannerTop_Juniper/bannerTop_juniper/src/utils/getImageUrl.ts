@@ -1,14 +1,3 @@
-import axios from "axios";
-
-// Define la estructura de tus datos
-type DataItem = {
-  id: number;
-  attributes: {
-    Vertical: string[];
-    // Otros atributos aquí
-  };
-};
-
 export const getImageUrlForPositionDesktop = (data: any, position: string) => {
   const positionData = data.data.find(
     (item: any) => item.attributes.Ubicacion === position
@@ -28,39 +17,47 @@ export const getImageUrlForPositionMobile = (data: any, position: string) => {
     : "";
 };
 
-export const getVerticalData = (data: any, position: string) => {
-  const positionData = data.data.find(
-    (item: any) => item.attributes.Ubicacion === position
-  );
+export const getVerticalData = (data: any) => {
+  const paquetesData: any[] = [];
+  const sinPaquetesData: any[] = [];
 
-  console.log(" getVerticalData ---->>>", positionData.attributes.Vertical);
-  return positionData && positionData.attributes.Vertical
-    ? positionData.attributes.Vertical
-    : [];
-};
-
-export const combineVerticalDataForPositions = (
-  data: any,
-  positions: string[]
-) => {
-  const combinedData: any[] = [];
-
-  positions.forEach((position: string) => {
-    const verticalData = getVerticalData(data, position);
-
-    if (verticalData && verticalData.length > 0) {
-      combinedData.push(...verticalData);
+  data.data.forEach((item: any) => {
+    if (item.attributes && Array.isArray(item.attributes.Vertical)) {
+      if (item.attributes.Vertical.includes('Paquetes')) {
+        paquetesData.push(item); // Agregar el objeto completo a paquetesData si contiene 'Paquetes'
+      } else {
+        sinPaquetesData.push(item); // Agregar el objeto completo a sinPaquetesData si no contiene 'Paquetes'
+      }
     }
   });
+  
+  console.log('paquetesData:', paquetesData);
+  console.log('sinPaquetesData:', sinPaquetesData);
 
-  const uniqueData = combinedData.filter((value, index, self) => {
-    return self.indexOf(value) === index;
-  });
-
-  console.log("---->>>", uniqueData);
-
-  return uniqueData;
+  return { paquetesData, sinPaquetesData };
 };
+// export const combineVerticalDataForPositions = (
+//   data: any,
+//   positions: string[]
+// ) => {
+//   const combinedData: any[] = [];
+
+//   positions.forEach((position: string) => {
+//     const verticalData = getVerticalData(data, position);
+
+//     if (verticalData && verticalData.length > 0) {
+//       combinedData.push(...verticalData);
+//     }
+//   });
+
+//   const uniqueData = combinedData.filter((value, index, self) => {
+//     return self.indexOf(value) === index;
+//   });
+
+//   console.log("combineVerticalDataForPositions---->>>", uniqueData);
+
+//   return uniqueData;
+// };
 
 export const getUrlLinkImage = (data: any, position: string) => {
   const positionData = data.data.find(
@@ -71,27 +68,3 @@ export const getUrlLinkImage = (data: any, position: string) => {
 
   return positionData ? positionData.attributes.Link_Imagen : "";
 };
-
-// Obtén los datos de la API
-export async function fetchDataFromAPIStrapi(): Promise<DataItem[]> {
-  try {
-    const response = await axios.get<DataItem[]>('https://xatega9fpn.us-east-1.awsapprunner.com/api/banner-top-junipers?populate=*');
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-}
-
-// Filtra los elementos que contienen "Paquetes" en la propiedad Vertical
-export async function obtenerElementosPaquetes(): Promise<DataItem[]> {
-  const data = await fetchDataFromAPIStrapi();
-
-  const elementosPaquetes = data.filter((item) => {
-    return item.attributes.Vertical.includes("Paquetes");
-  });
-console.log("elementosPaquetes ---->>",elementosPaquetes)
-  return elementosPaquetes;
-}
-
-obtenerElementosPaquetes()

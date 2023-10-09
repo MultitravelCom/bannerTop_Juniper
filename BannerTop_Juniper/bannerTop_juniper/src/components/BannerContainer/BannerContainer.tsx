@@ -6,7 +6,7 @@ interface BannerContainerProps {
   showPackageImages: boolean;
   scrollAncla: (event: React.MouseEvent<HTMLAnchorElement>, target: string) => void;
   containerClassName: string;
-  position: "left" | "center" | "right";
+  position: string
   imageUrlsDesktop: string,
   imageUrlMobile: string,
   imageUrl: string,
