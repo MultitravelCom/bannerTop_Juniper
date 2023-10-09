@@ -6,10 +6,11 @@ import {
   getBannerId,
   getImageUrlForPositionDesktop,
   getImageUrlForPositionMobile,
+  getShowBannerStatus,
   getUrlLinkImage,
   getVerticalData,
 } from "./utils/getImageUrl";
-import { getShowBannerStatus, uniqueDataKeywords } from "./utils/useShowBanner";
+// import { getShowBannerStatus, uniqueDataKeywords } from "./utils/useShowBanner";
 
 function App() {
   const [imageUrlsDesktop, setImageUrlsDesktop] = useState<string[]>([]);
@@ -65,7 +66,7 @@ function App() {
   };
 
   const bannerId = getBannerId();
-  const showBanner = getShowBannerStatus(verticalData, uniqueDataKeywords);
+  const showBanner = getShowBannerStatus();
 
   return (
     <div className="container-fluid main__container__bannerTop scroll-mobile">

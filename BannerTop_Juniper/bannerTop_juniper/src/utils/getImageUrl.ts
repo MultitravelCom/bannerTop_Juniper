@@ -36,28 +36,6 @@ export const getVerticalData = (data: any) => {
 
   return { paquetesData, sinPaquetesData };
 };
-// export const combineVerticalDataForPositions = (
-//   data: any,
-//   positions: string[]
-// ) => {
-//   const combinedData: any[] = [];
-
-//   positions.forEach((position: string) => {
-//     const verticalData = getVerticalData(data, position);
-
-//     if (verticalData && verticalData.length > 0) {
-//       combinedData.push(...verticalData);
-//     }
-//   });
-
-//   const uniqueData = combinedData.filter((value, index, self) => {
-//     return self.indexOf(value) === index;
-//   });
-
-//   console.log("combineVerticalDataForPositions---->>>", uniqueData);
-
-//   return uniqueData;
-// };
 
 export const getUrlLinkImage = (data: any, position: string) => {
   const positionData = data.data.find(
@@ -80,3 +58,13 @@ export function getBannerId() {
   }
 }
 // ***********************************************************
+
+export const getShowBannerStatus = (): boolean => {
+  const currentUrl = window.location.href;
+  const targetUrl = 'https://www.multitravel.com/packages/flighthotel/';
+  
+  const isMatch = currentUrl === targetUrl;
+  
+  console.log("showBanner:", isMatch);
+  return isMatch;
+};
