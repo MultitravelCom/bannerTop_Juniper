@@ -1,8 +1,6 @@
 import { fetchDataFromAPIStrapi } from "../service";
 
 export async function procesarDatosDeAPI() {
-  console.log("En ejecucion");
-
   try {
     // Obtener los datos de la API utilizando fetchDataFromAPIStrapi
     const jsonData: any = await fetchDataFromAPIStrapi();
@@ -42,8 +40,6 @@ export async function procesarDatosDeAPI() {
       console.log(JSON.stringify(obj, null, 2));
       console.log(); // Agregar una línea en blanco para separación
     });
-
-    console.log("Datos organizados por vertical:", finalResult);
   } catch (error) {
     console.error("Error al procesar datos de la API:", error);
   }

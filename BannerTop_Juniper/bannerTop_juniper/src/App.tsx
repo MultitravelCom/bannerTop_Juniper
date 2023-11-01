@@ -21,20 +21,20 @@ function App() {
     useState<boolean>(false);
   const [paquetesData, setPaquetesData] = useState<any[]>([]);
   const [sinPaquetesData, setSinPaquetesData] = useState<any[]>([]);
+  const [shouldScroll, setShouldScroll] = useState(true);
 
   useEffect(() => {
     fetchData();
     setUrlIncludesPaquetes(window.location.href.includes("Paquetes"));
-  }, []);
+    setShouldScroll(false);
 
-  
+  }, []);
 
   const fetchData = async () => {
     try {
       const data = await fetchDataFromAPIStrapi();
 
-      const { paquetesData, sinPaquetesData } = getVerticalData(
-        data);
+      const { paquetesData, sinPaquetesData } = getVerticalData(data);
       setPaquetesData(paquetesData);
       setSinPaquetesData(sinPaquetesData);
 
@@ -73,41 +73,58 @@ function App() {
       {!showBanner ? (
         <>
           {/* ACA MOSTRAR LOS BANNERS DEL GRUPO sinPaquetesData */}
-          {console.log("sinPaquetesData[0]?.attributes?.url-img:", sinPaquetesData[1]?.attributes?.Imagen_Desktop?.data[0]?.attributes?.url)}
           <BannerContainer
             bannerId={`bannerTop__left_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_left"
             position="left"
-            imageUrlsDesktop={sinPaquetesData[0]?.attributes?.Imagen_Desktop?.data[0]?.attributes?.url}
-            imageUrlMobile={sinPaquetesData[0]?.attributes?.Imagen_Mobile?.data[0]?.attributes?.url}
+            imageUrlsDesktop={
+              sinPaquetesData[0]?.attributes?.Imagen_Desktop?.data[0]
+                ?.attributes?.url
+            }
+            imageUrlMobile={
+              sinPaquetesData[0]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={sinPaquetesData[0]?.attributes?.Link_Imagen}
           />
           <BannerContainer
-             bannerId={`bannerTop__center_${bannerId}`}
+            bannerId={`bannerTop__center_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_center"
             position="center"
-            imageUrlsDesktop={sinPaquetesData[1]?.attributes?.Imagen_Desktop?.data[0]?.attributes?.url}
-            imageUrlMobile={sinPaquetesData[1]?.attributes?.Imagen_Mobile?.data[0]?.attributes?.url}
+            imageUrlsDesktop={
+              sinPaquetesData[1]?.attributes?.Imagen_Desktop?.data[0]
+                ?.attributes?.url
+            }
+            imageUrlMobile={
+              sinPaquetesData[1]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={sinPaquetesData[1]?.attributes?.Link_Imagen}
           />
           <BannerContainer
-             bannerId={`bannerTop__right_${bannerId}`}
+            bannerId={`bannerTop__right_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_right"
             position="right"
-            imageUrlsDesktop={sinPaquetesData[2]?.attributes?.Imagen_Desktop?.data[0]?.attributes?.url}
-            imageUrlMobile={sinPaquetesData[2]?.attributes?.Imagen_Mobile?.data[0]?.attributes?.url}
+            imageUrlsDesktop={
+              sinPaquetesData[2]?.attributes?.Imagen_Desktop?.data[0]
+                ?.attributes?.url
+            }
+            imageUrlMobile={
+              sinPaquetesData[2]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={sinPaquetesData[2]?.attributes?.Link_Imagen}
           />
         </>
@@ -118,36 +135,54 @@ function App() {
             bannerId={`bannerTop__left_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_left"
             position="left"
-            imageUrlsDesktop={paquetesData[0]?.attributes?.Imagen_Desktop?.data[0]?.attributes?.url}
-            imageUrlMobile={paquetesData[0]?.attributes?.Imagen_Mobile?.data[0]?.attributes?.url}
+            imageUrlsDesktop={
+              paquetesData[0]?.attributes?.Imagen_Desktop?.data[0]?.attributes
+                ?.url
+            }
+            imageUrlMobile={
+              paquetesData[0]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={paquetesData[0]?.attributes?.Link_Imagen}
           />
           <BannerContainer
             bannerId={`bannerTop__center_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_center"
             position="center"
-            imageUrlsDesktop={paquetesData[1]?.attributes?.Imagen_Desktop?.data[1]?.attributes?.url}
-            imageUrlMobile={paquetesData[1]?.attributes?.Imagen_Mobile?.data[1]?.attributes?.url}
+            imageUrlsDesktop={
+              paquetesData[1]?.attributes?.Imagen_Desktop?.data[0]?.attributes
+                ?.url
+            }
+            imageUrlMobile={
+              paquetesData[1]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={paquetesData[1]?.attributes?.Link_Imagen}
           />
           <BannerContainer
             bannerId={`bannerTop__right_${bannerId}`}
             showPackageImages={false}
             scrollAncla={(event) =>
-              scrollHandler(event, "home-sliding-offers-2")
+              shouldScroll && scrollHandler(event, "home-sliding-offers-2")
             }
             containerClassName="main__container_right"
             position="right"
-            imageUrlsDesktop={paquetesData[2]?.attributes?.Imagen_Desktop?.data[2]?.attributes?.url}
-            imageUrlMobile={paquetesData[2]?.attributes?.Imagen_Mobile?.data[2]?.attributes?.url}
+            imageUrlsDesktop={
+              paquetesData[2]?.attributes?.Imagen_Desktop?.data[0]?.attributes
+                ?.url
+            }
+            imageUrlMobile={
+              paquetesData[2]?.attributes?.Imagen_Mobile?.data[0]?.attributes
+                ?.url
+            }
             imageUrl={paquetesData[2]?.attributes?.Link_Imagen}
           />
         </>

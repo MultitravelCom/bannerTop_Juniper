@@ -23,16 +23,13 @@ export const getVerticalData = (data: any) => {
 
   data.data.forEach((item: any) => {
     if (item.attributes && Array.isArray(item.attributes.Vertical)) {
-      if (item.attributes.Vertical.includes('Paquetes')) {
+      if (item.attributes.Vertical.includes("Paquetes")) {
         paquetesData.push(item); // Agregar el objeto completo a paquetesData si contiene 'Paquetes'
       } else {
         sinPaquetesData.push(item); // Agregar el objeto completo a sinPaquetesData si no contiene 'Paquetes'
       }
     }
   });
-  
-  console.log('paquetesData:', paquetesData);
-  console.log('sinPaquetesData:', sinPaquetesData);
 
   return { paquetesData, sinPaquetesData };
 };
@@ -42,8 +39,6 @@ export const getUrlLinkImage = (data: any, position: string) => {
     (item: any) => item.attributes.Ubicacion === position
   );
 
-  console.log("---->>>", positionData.attributes.Link_Imagen);
-
   return positionData ? positionData.attributes.Link_Imagen : "";
 };
 
@@ -51,20 +46,18 @@ export const getUrlLinkImage = (data: any, position: string) => {
 export function getBannerId() {
   const url = window.location.href;
 
-  if (url.includes('/flighthotel')) {
-      return 'flighthotel';
+  if (url.includes("/flighthotel")) {
+    return "flighthotel";
   } else {
-      return 'no_flighthotel';
+    return "no_flighthotel";
   }
 }
 // ***********************************************************
 
 export const getShowBannerStatus = (): boolean => {
   const currentUrl = window.location.href;
-  const targetUrl = 'https://www.multitravel.com/packages/flighthotel/';
-  
+  const targetUrl = "https://www.multitravel.com/packages/flighthotel/";
+
   const isMatch = currentUrl === targetUrl;
-  
-  console.log("showBanner:", isMatch);
   return isMatch;
 };
