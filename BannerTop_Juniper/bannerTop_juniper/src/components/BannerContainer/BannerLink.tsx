@@ -6,9 +6,9 @@ interface BannerLinkProps {
     event: React.MouseEvent<HTMLAnchorElement>,
     target: string
   ) => void;
-  imageUrlsDesktop: string;
-  imageUrlMobile: string;
-  imageUrl: string;
+  imageUrlsDesktop: undefined | string,
+  imageUrlMobile: undefined | string,
+  imageUrl: undefined | string,
 }
 
 const BannerLink: React.FC<BannerLinkProps> = ({

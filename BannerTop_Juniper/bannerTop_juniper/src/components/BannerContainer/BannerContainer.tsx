@@ -7,9 +7,9 @@ interface BannerContainerProps {
   scrollAncla: (event: React.MouseEvent<HTMLAnchorElement>, target: string) => void;
   containerClassName: string;
   position: string
-  imageUrlsDesktop: string,
-  imageUrlMobile: string,
-  imageUrl: string,
+  imageUrlsDesktop: undefined | string,
+  imageUrlMobile: undefined | string,
+  imageUrl: undefined | string,
 }
 
 const BannerContainer: React.FC<BannerContainerProps> = ({
