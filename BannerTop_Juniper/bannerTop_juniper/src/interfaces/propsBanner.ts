@@ -1,5 +1,5 @@
 export default interface propsDataBanner {
-    imageUrlsDesktop: string,
-    imageUrlMobile: string,
-    imageUrl: string,
+  imageUrlsDesktop: string[],
+  imageUrlMobile: string[],
+  imageUrl: string[],
   }
